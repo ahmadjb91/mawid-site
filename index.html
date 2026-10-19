@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mawid</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mawid – קביעת תורים לספרים, מעצבות שיער וקוסמטיקאיות, בעברית ובערבית.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: plum hero with the booking card as the thesis, then two audiences side by side, then the business offer. */
+:root {
+  --plum: #2E1A47; --plum-2: #4A2C6B; --coral: #E8846B; --coral-ink: #2E1A47;
+  --bg: #F6F1EB; --surface: #FFFFFF; --ink: #24152F; --muted: #6E6177; --line: #E6DCD3;
+  --hero-ink: #FBF6F1;
+  --f: "Rubik", "Segoe UI", "Arial Hebrew", "Noto Sans Arabic", Tahoma, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17101F; --surface: #221830; --ink: #F3ECF6; --muted: #B3A6BC; --line: #352847; color-scheme: dark;
+} }
+:root[data-theme="dark"] { --bg: #17101F; --surface: #221830; --ink: #F3ECF6; --muted: #B3A6BC; --line: #352847; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.15; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 8px; }
+
+/* hero */
+.hero { background: radial-gradient(120% 90% at 85% 0%, var(--plum-2) 0%, var(--plum) 60%); color: var(--hero-ink); padding-top: env(safe-area-inset-top, 0px); }
+.hero .wrap { padding-block: 22px 56px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; letter-spacing: .01em; }
+.lang { background: rgba(255,255,255,.1); color: var(--hero-ink); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 14px; font: 500 14px var(--f); cursor: pointer; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; margin-top: 44px; }
+.biz-for { display: inline-block; background: var(--coral); color: var(--coral-ink); font-weight: 700; border-radius: 999px; padding: 6px 14px; font-size: 14px; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; }
+.hero h1 em { font-style: normal; color: var(--coral); }
+.lede { margin-top: 16px; font-size: 18px; max-width: 30em; opacity: .88; }
+.stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.store { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; background: #000; color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 14px; padding: 10px 18px; min-width: 176px; }
+.store svg { flex: 0 0 auto; }
+.store small { display: block; font-size: 11px; opacity: .8; line-height: 1.2; }
+.store b { display: block; font-size: 17px; font-weight: 700; line-height: 1.2; }
+.store.mine { outline: 3px solid var(--coral); outline-offset: 2px; }
+.note { margin-top: 12px; font-size: 13px; opacity: .7; }
+
+/* booking card mock */
+.mock { justify-self: center; width: min(300px, 100%); background: #FBF6F1; color: #24152F; border-radius: 28px; padding: 18px; box-shadow: 0 30px 60px rgba(10,4,20,.45); transform: rotate(-2deg); }
+.mock .bar { display: flex; align-items: center; gap: 10px; }
+.mock .av { width: 42px; height: 42px; border-radius: 12px; background: var(--plum); display: grid; place-items: center; color: #fff; font-weight: 800; }
+.mock h3 { font-size: 16px; }
+.mock .sub { font-size: 12px; color: #6E6177; }
+.days { display: flex; gap: 6px; margin-top: 14px; }
+.days span { flex: 1; text-align: center; border-radius: 10px; padding: 6px 0; font-size: 12px; background: #EFE6DD; }
+.days span.on { background: var(--plum); color: #fff; }
+.slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+.slots span { text-align: center; border: 1.5px solid #E2D6CB; border-radius: 10px; padding: 7px 0; font-size: 13px; font-weight: 500; }
+.slots span.taken { color: #B9AEB5; text-decoration: line-through; border-style: dashed; }
+.slots span.pick { background: var(--coral); border-color: var(--coral); color: #2E1A47; font-weight: 700; }
+.agenda { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 6px; }
+.agenda li { display: grid; grid-template-columns: 46px 1fr auto; gap: 8px; align-items: center; background: #fff; border: 1px solid #EADFD5; border-radius: 12px; padding: 8px 10px; font-size: 13px; }
+.agenda time { font-weight: 700; color: var(--plum); font-variant-numeric: tabular-nums; }
+.agenda b { font-variant-numeric: tabular-nums; }
+.agenda li.new { border-color: var(--coral); background: #FDEEE9; }
+.agenda i { font-style: normal; font-size: 11px; font-weight: 700; background: var(--coral); color: var(--plum); border-radius: 999px; padding: 2px 8px; }
+.mock .ok { margin-top: 12px; background: var(--plum); color: #fff; border-radius: 12px; text-align: center; padding: 10px; font-weight: 700; font-size: 14px; }
+
+/* features */
+.feat-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 26px; }
+.feat-head h2 { font-size: clamp(26px, 4vw, 36px); }
+.feat-head p { color: var(--muted); max-width: 36em; }
+.feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.feat { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.phone { align-self: center; width: 200px; max-width: 100%; aspect-ratio: 360 / 692; border-radius: 26px; overflow: hidden; border: 6px solid #1B1024; background: #1B1024; box-shadow: 0 14px 30px rgba(46,26,71,.18); }
+.phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.feat h3 { font-size: 19px; }
+.feat p { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) {
+  .feats { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 10px; margin-inline: calc(-1 * max(18px, env(safe-area-inset-left, 0px))); padding-inline: max(18px, env(safe-area-inset-left, 0px)); scrollbar-width: thin; }
+  .feat { flex: 0 0 78%; scroll-snap-align: center; }
+  .swipe { display: block !important; }
+}
+.swipe { display: none; color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+/* audiences */
+section { padding-block: 56px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--coral); text-transform: uppercase; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px; min-width: 0; }
+.panel h2 { font-size: 24px; margin-top: 6px; }
+.panel ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+.panel li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+.panel li svg { margin-top: 3px; }
+
+/* offer */
+.offer { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.offer-grid { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
+.offer h2 { font-size: clamp(26px, 4vw, 36px); }
+.offer p.lede2 { margin-top: 10px; color: var(--muted); max-width: 34em; }
+.price { display: flex; gap: 12px; }
+.price div { border: 1.5px solid var(--line); border-radius: 18px; padding: 14px 20px; text-align: center; min-width: 120px; }
+.price div.best { border-color: var(--coral); }
+.price small { display: block; color: var(--muted); font-size: 13px; }
+.price b { display: block; font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.trial { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; background: color-mix(in srgb, var(--coral) 16%, transparent); border-radius: 12px; padding: 8px 14px; font-weight: 500; }
+
+footer { padding-block: 30px calc(30px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+@media (max-width: 760px) {
+  .hero-grid, .two, .offer-grid { grid-template-columns: 1fr; }
+  .hero-grid { margin-top: 28px; gap: 34px; }
+  .mock { transform: none; }
+  .store { flex: 1 1 160px; justify-content: center; }
+  section { padding-block: 40px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slots span.pick { animation: pick 2.4s ease-in-out infinite; }
+  @keyframes pick { 0%, 100% { transform: none; } 50% { transform: scale(1.06); } }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#FBF6F1" fill-opacity=".12"/><circle cx="32" cy="32" r="17" fill="none" stroke="#FBF6F1" stroke-opacity=".25" stroke-width="4"/><circle cx="32" cy="32" r="17" fill="none" stroke="#E8846B" stroke-width="4" stroke-dasharray="80 200" stroke-linecap="round" transform="rotate(-90 32 32)"/><path d="M32 22v10l7 5" stroke="#FBF6F1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="32" cy="32" r="2.6" fill="#E8846B"/></svg>
+        Mawid
+      </div>
+      <button class="lang" id="lang" type="button">العربية</button>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <span class="biz-for" id="bizFor" hidden></span>
+        <h1 data-t="h1"></h1>
+        <p class="lede" data-t="lede"></p>
+        <div class="stores">
+          <a class="store" id="ios" href="https://apps.apple.com/app/id6821429236" target="_blank" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.54 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.24 2.73 2.2 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.41 1.2-2.47-.03-.01-2.3-.88-2.32-3.5zM14.2 6.13c.6-.73 1.01-1.74.9-2.75-.87.04-1.92.58-2.54 1.3-.56.64-1.05 1.67-.92 2.66.97.08 1.96-.49 2.56-1.21z"/></svg>
+            <span><small data-t="dlOn"></small><b>App Store</b></span>
+          </a>
+          <a class="store" id="android" href="https://play.google.com/store/apps/details?id=app.mawid" target="_blank" rel="noopener">
+            <svg width="24" height="26" viewBox="0 0 24 26" aria-hidden="true"><path d="M1 1.5 13.6 13 1 24.5c-.4-.3-.6-.8-.6-1.4V2.9c0-.6.2-1.1.6-1.4Z" fill="#00D7FE"/><path d="m17.8 9.2-4.2 3.8 4.2 3.8 4.6-2.6c1.1-.6 1.1-1.8 0-2.4l-4.6-2.6Z" fill="#FFCE00"/><path d="M13.6 13 1 24.5c.5.4 1.2.5 2 .1l14.8-7.8-4.2-3.8Z" fill="#FF3A44"/><path d="M13.6 13 17.8 9.2 3 1.4C2.2 1 1.5 1.1 1 1.5L13.6 13Z" fill="#00F076"/></svg>
+            <span><small data-t="getOn"></small><b>Google Play</b></span>
+          </a>
+        </div>
+        <p class="note" data-t="free"></p>
+      </div>
+
+      <div class="mock" id="mockBiz" aria-hidden="true">
+        <div class="bar"><div class="av">✂</div><div><h3 data-t="bmTitle"></h3><p class="sub" data-t="bmSub"></p></div></div>
+        <ul class="agenda">
+          <li><time>09:00</time><span data-t="bm1"></span><b>₪60</b></li>
+          <li><time>09:30</time><span data-t="bm2"></span><b>₪90</b></li>
+          <li class="new"><time>10:30</time><span data-t="bm3"></span><i data-t="bmNew"></i></li>
+          <li><time>11:00</time><span data-t="bm4"></span><b>₪60</b></li>
+        </ul>
+        <div class="ok"><span data-t="bmIncome"></span> · ₪270</div>
+      </div>
+      <div class="mock" id="mockClient" aria-hidden="true" hidden>
+        <div class="bar"><div class="av">✂</div><div><h3 data-t="mockName"></h3><p class="sub" data-t="mockSub"></p></div></div>
+        <div class="days"><span data-t="d1"></span><span class="on" data-t="d2"></span><span data-t="d3"></span><span data-t="d4"></span></div>
+        <div class="slots"><span>09:00</span><span class="taken">09:30</span><span>10:00</span><span class="taken">10:30</span><span class="pick">11:00</span><span>11:30</span></div>
+        <div class="ok" data-t="mockOk"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="feat-head">
+      <span class="eyebrow" data-t="fEyebrow"></span>
+      <h2 data-t="fTitle"></h2>
+      <p data-t="fText"></p>
+      <span class="swipe" data-t="swipe"></span>
+    </div>
+    <div class="feats" id="feats"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div class="panel">
+      <span class="eyebrow" data-t="bEyebrow"></span>
+      <h2 data-t="bTitle"></h2>
+      <ul data-list="bList"></ul>
+    </div>
+    <div class="panel">
+      <span class="eyebrow" data-t="cEyebrow"></span>
+      <h2 data-t="cTitle"></h2>
+      <ul data-list="cList"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="offer">
+  <div class="wrap offer-grid">
+    <div>
+      <h2 data-t="oTitle"></h2>
+      <p class="lede2" data-t="oText"></p>
+      <span class="trial">🎁 <span data-t="oTrial"></span></span>
+    </div>
+    <div class="price">
+      <div><small data-t="pMonth"></small><b>₪79</b><small data-t="perMonth"></small></div>
+      <div class="best"><small data-t="pYear"></small><b>₪790</b><small data-t="perYear"></small></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 AJ Softworks · Mawid</span>
+    <a href="https://sites.google.com/view/mawid-privacy" target="_blank" rel="noopener" data-t="privacy"></a>
+  </div>
+</footer>
+
+<script>
+const T = {
+  he: {
+    dir: 'rtl', other: 'العربية',
+    h1: 'היומן שלך <em>מתמלא לבד</em>',
+    lede: 'אפליקציית תורים לספרים, מעצבות שיער וקוסמטיקאיות. הלקוחות קובעים תור 24/7, ואתה ממשיך לעבוד בלי לענות לטלפון. בעברית ובערבית.',
+    h1c: 'התור הבא שלך, <em>בלחיצה אחת</em>',
+    ledec: 'בוחרים שירות, רואים רק שעות פנויות, ומאשרים. בלי להתקשר ובלי לחכות לתשובה.',
+    bmTitle: 'היום · ב׳ 20', bmSub: '4 תורים', bm1: 'רמי · תספורת', bm2: 'יוסי · תספורת וזקן', bm3: 'מוחמד · תספורת', bmNew: 'חדש', bm4: 'עלי · תספורת', bmIncome: 'הכנסה צפויה',
+    dlOn: 'להורדה מ־', getOn: 'זמין ב־',
+    free: '14 ימים ראשונים חינם · אפשר לבטל בכל עת',
+    freec: 'חינם ללקוחות. בלי פרסומות.',
+    forBiz: 'קובעים תור אצל {n}',
+    mockName: 'מספרת הדגמה', mockSub: 'תספורת גבר · 30 דק׳ · ₪60',
+    d1: 'א׳ 19', d2: 'ב׳ 20', d3: 'ג׳ 21', d4: 'ד׳ 22', mockOk: 'אישור תור · 11:00',
+    fEyebrow: 'מה יש באפליקציה', fTitle: 'כל מה שהעסק צריך, במקום אחד', fText: 'צילומי מסך אמיתיים מהאפליקציה.', swipe: 'החליקו לצד לראות עוד ←',
+    feats: [
+      ['4', 'יומן חכם בזמן אמת', 'תורים חדשים מופיעים מיד, עם הכנסה צפויה ליום, סימון הגיע/לא הגיע, תור ידני וחסימת זמן.'],
+      ['5', 'שירותים מוכנים לכל תחום', 'בוחרים מהרשימה ומתמחרים, או מוסיפים שירות משלך. לכל שירות יש משך, והתורים מסתדרים לבד.'],
+      ['hours', 'שעות, הפסקות וחופשות', 'פיצול יום לבוקר וערב, ימי חופש, חודשי עבודה, כמה לקוחות במקביל והגבלת זמן לביטול.'],
+      ['biz', 'מיקום וניווט', 'כתובת מדויקת ומפה. הלקוח מגיע בלחיצה עם Waze או מפות, ויכול להתקשר או לשלוח וואטסאפ.'],
+      ['2', 'דף עסק עם מחירון', 'הלקוחות רואים את כל השירותים, המחירים ומשך כל טיפול, ובוחרים אחד או כמה.'],
+      ['3', 'קביעת תור בלחיצה', 'רק שעות פנויות באמת, בלי חפיפות. הלקוח מקבל תזכורת יום לפני ושעתיים לפני התור.'],
+      ['1', 'הופעה בחיפוש', 'לקוחות מוצאים אותך לפי שם העסק, השם שלך, מספר הטלפון, העיר והתחום.'],
+      ['6', 'סיכום חודשי', 'הכנסות החודש, השירותים המבוקשים, הלקוחות הקבועים ומי לא הגיע.'],
+      ['7', '7 ערכות עיצוב', 'דף העסק בצבעים שמתאימים לסגנון שלך, מברברשופ בשחור וזהב ועד ספא.'],
+    ],
+    cEyebrow: 'ללקוחות', cTitle: 'מוצאים, בוחרים שעה, מגיעים',
+    cList: ['חיפוש לפי שם העסק, הטלפון או העיר', 'מחירים ומשך של כל שירות לפני שקובעים', 'תזכורת יום לפני ושעתיים לפני התור', 'ניווט ב־Waze או ב־Google Maps בלחיצה'],
+    bEyebrow: 'לבעלי עסקים', bTitle: 'יומן שמתמלא בלי טלפונים',
+    bList: ['הלקוחות קובעים לבד, 24/7, בלי חפיפות', 'שעות, הפסקות, חופשות ומשך לכל שירות', 'הופעה בחיפוש לפי עיר ותחום', 'סיכום חודשי של הכנסות ולקוחות קבועים'],
+    oTitle: 'מנוי לבעלי עסקים', oText: 'המנוי מפעיל את דף העסק שלך בחיפוש ומאפשר ללקוחות לקבוע תורים. ללא הגבלת תורים ולקוחות.',
+    oTrial: '14 הימים הראשונים חינם, ואפשר לבטל לפני החיוב',
+    pMonth: 'חודשי', pYear: 'שנתי · חודשיים חינם', perMonth: 'לחודש', perYear: 'לשנה',
+    privacy: 'מדיניות פרטיות',
+  },
+  ar: {
+    dir: 'rtl', other: 'עברית',
+    h1: 'مواعيدك <em>بتتعبّى لحالها</em>',
+    lede: 'تطبيق مواعيد للحلاقين، مصففات الشعر وخبيرات التجميل. الزباين بحجزوا 24/7، وإنت بتكمّل شغلك بدون ما ترد عالتلفون. بالعربي والعبري.',
+    h1c: 'دورك الجاي، <em>بكبسة وحدة</em>',
+    ledec: 'بتختار الخدمة، بتشوف بس الأوقات الفاضية، وبتأكّد. بدون اتصال وبدون استنا.',
+    bmTitle: 'اليوم · إثنين 20', bmSub: '4 مواعيد', bm1: 'رامي · قصة', bm2: 'يوسف · قصة ودقن', bm3: 'محمد · قصة', bmNew: 'جديد', bm4: 'علي · قصة', bmIncome: 'الدخل المتوقع',
+    dlOn: 'نزّله من', getOn: 'متوفر على',
+    free: 'أول 14 يوم مجاناً · بتقدر تلغي بأي وقت',
+    freec: 'مجاني للزباين. بدون إعلانات.',
+    forBiz: 'احجز دورك عند {n}',
+    mockName: 'صالون تجريبي', mockSub: 'قصة شعر رجالي · 30 د · ₪60',
+    d1: 'أحد 19', d2: 'إثنين 20', d3: 'ثلاثاء 21', d4: 'أربعاء 22', mockOk: 'تأكيد الدور · 11:00',
+    fEyebrow: 'شو في بالتطبيق', fTitle: 'كل اللي بتحتاجه مصلحتك، بمكان واحد', fText: 'صور حقيقية من التطبيق.', swipe: 'اسحب عالجنب لتشوف أكثر ←',
+    feats: [
+      ['4', 'مواعيد ذكية بالوقت الحقيقي', 'المواعيد الجديدة بتظهر فوراً، مع الدخل المتوقع لليوم، علامة وصل/ما وصل، دور يدوي وحجب وقت.'],
+      ['5', 'خدمات جاهزة لكل مجال', 'بتختار من القائمة وبتحط السعر، أو بتزيد خدمة خاصة فيك. لكل خدمة مدة، والمواعيد بتترتّب لحالها.'],
+      ['hours', 'ساعات، استراحات وعطل', 'تقسيم اليوم لصبح ومسا، أيام عطلة، أشهر العمل، كم زبون بنفس الوقت وحد زمني للإلغاء.'],
+      ['biz', 'الموقع والطريق', 'عنوان دقيق وخريطة. الزبون بوصل بكبسة مع Waze أو الخرائط، وبقدر يتصل أو يبعت واتساب.'],
+      ['2', 'صفحة مصلحة مع الأسعار', 'الزباين بشوفوا كل الخدمات، الأسعار ومدة كل خدمة، وبختاروا وحدة أو أكثر.'],
+      ['3', 'حجز دور بكبسة', 'بس الأوقات الفاضية فعلاً، بدون تداخل. الزبون بوصله تذكير قبل بيوم وقبل ساعتين.'],
+      ['1', 'الظهور بالبحث', 'الزباين بلاقوك حسب اسم المصلحة، اسمك، رقم التلفون، المدينة والمجال.'],
+      ['6', 'ملخص شهري', 'دخل الشهر، الخدمات المطلوبة، الزباين الدايمين ومين ما وصل.'],
+      ['7', '7 تصاميم', 'صفحة مصلحتك بألوان بتناسب ستايلك، من باربرشوب أسود وذهبي لحد السبا.'],
+    ],
+    cEyebrow: 'للزباين', cTitle: 'لاقي، اختار الوقت، وتعال',
+    cList: ['بحث حسب اسم المصلحة، التلفون أو المدينة', 'الأسعار ومدة كل خدمة قبل الحجز', 'تذكير قبل الدور بيوم وقبل ساعتين', 'الطريق بـ Waze أو Google Maps بكبسة'],
+    bEyebrow: 'لأصحاب المصالح', bTitle: 'مواعيد بتتعبّى بدون تلفونات',
+    bList: ['الزباين بحجزوا لحالهم 24/7، بدون تداخل', 'ساعات، استراحات، عطل ومدة لكل خدمة', 'الظهور بالبحث حسب المدينة والمجال', 'ملخص شهري للدخل والزباين الدايمين'],
+    oTitle: 'اشتراك لأصحاب المصالح', oText: 'الاشتراك بفعّل صفحة مصلحتك بالبحث وبخلّي الزباين يحجزوا. بدون حد للمواعيد والزباين.',
+    oTrial: 'أول 14 يوم مجاناً، وبتقدر تلغي قبل الدفع',
+    pMonth: 'شهري', pYear: 'سنوي · شهرين مجاناً', perMonth: 'بالشهر', perYear: 'بالسنة',
+    privacy: 'سياسة الخصوصية',
+  },
+};
+const check = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#E8846B" fill-opacity=".18"/><path d="m7 12.5 3.2 3L17 9" fill="none" stroke="#E8846B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+// ?n=<business name> — the page a business shares with its clients
+let bizName = '';
+try { bizName = (new URLSearchParams(location.search).get('n') || '').slice(0, 60); } catch (e) {}
+
+let lang = 'he';
+try { const q = new URLSearchParams(location.search).get('lang'); lang = q === 'ar' || q === 'he' ? q : ((navigator.language || '').startsWith('ar') ? 'ar' : 'he'); } catch (e) {}
+
+function render() {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = t.dir;
+  // a business's own link (?n=) shows the client version of the hero
+  const key = (k) => (bizName && t[k + 'c'] ? k + 'c' : k);
+  document.querySelectorAll('[data-t]').forEach((el) => { el.innerHTML = t[key(el.dataset.t)]; });
+  document.getElementById('mockBiz').hidden = !!bizName;
+  document.getElementById('mockClient').hidden = !bizName;
+  document.querySelectorAll('[data-list]').forEach((ul) => { ul.innerHTML = t[ul.dataset.list].map((x) => `<li>${check}<span>${x}</span></li>`).join(''); });
+  document.getElementById('feats').innerHTML = t.feats.map(([img, h, p]) =>
+    `<article class="feat"><div class="phone"><img src="img/${lang}-${img}.jpg" alt="${h}" loading="lazy" width="360" height="692"></div><h3>${h}</h3><p>${p}</p></article>`).join('');
+  document.getElementById('lang').textContent = t.other;
+  const bf = document.getElementById('bizFor');
+  if (bizName) { bf.textContent = t.forBiz.replace('{n}', bizName); bf.hidden = false; }
+}
+document.getElementById('lang').addEventListener('click', () => { lang = lang === 'he' ? 'ar' : 'he'; render(); });
+
+// mark the store that matches this phone
+const ua = navigator.userAgent || '';
+if (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && 'ontouchend' in document)) document.getElementById('ios').classList.add('mine');
+else if (/Android/i.test(ua)) document.getElementById('android').classList.add('mine');
+
+render();
+</script>
+</body>
+</html>
